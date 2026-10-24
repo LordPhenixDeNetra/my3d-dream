@@ -54,7 +54,13 @@ jobs:
 
       # `prepublishOnly` runs the test suite, so a failing suite blocks the publication.
       - name: Publish with provenance
-        run: npm publish --provenance --access public
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "my3d-dream@${version}" version >/dev/null 2>&1; then
+            echo "::notice::version ${version} is already on npm, skipping the publish step"
+            exit 0
+          fi
+          npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
