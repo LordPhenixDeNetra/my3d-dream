@@ -1,10 +1,29 @@
 {
   "name": "my3d-dream",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "My3D_Dream — DSH plugin for grounded 3D scene authoring: indexed search, scaffold, render budget, capture.",
   "license": "MIT",
+  "author": "LordPhenixDeNetra",
+  "contributors": [
+    "NetraDevLPDN <144937204+NetraDevLPDN@users.noreply.github.com>"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "three.js",
+    "3d",
+    "scene",
+    "bm25"
+  ],
+  "homepage": "https://github.com/LordPhenixDeNetra/my3d-dream#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LordPhenixDeNetra/my3d-dream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LordPhenixDeNetra/my3d-dream/issues"
+  },
   "main": "src/plugin.mjs",
   "bin": {
     "my3d": "bin/my3d.mjs"
@@ -32,10 +51,14 @@
   },
   "scripts": {
     "test": "node --test",
-    "index": "node scripts/build-index.mjs"
+    "index": "node scripts/build-index.mjs",
+    "prepublishOnly": "npm test"
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.5",
