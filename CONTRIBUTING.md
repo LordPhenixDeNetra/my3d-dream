@@ -1,58 +1,56 @@
-# Contribuer
+# Contributing
 
-## Règles d'ingénierie
+## Engineering rules
 
-1. **Originalité.** Aucun corpus, code ou module tiers n'entre dans le dépôt. `upstream/` est interdit
-   et la CI échoue s'il est versionné. Une fiche de connaissance se rédige ici, elle ne s'importe pas.
-2. **Zéro dépendance runtime.** Le paquet ne déclare que des `peerDependencies` optionnelles vers
-   l'hôte DSH. Toute dépendance ajoutée doit être justifiée dans la pull request et pesée en taille.
-3. **ESM, sans étape de build.** `node src/plugin.mjs` doit fonctionner tel quel. Pas de transpileur,
-   pas de bundler pour le paquet lui-même.
-4. **Portable Windows et Linux.** Pas de renommage atomique (`rename` échoue en `EPERM` sur un lecteur
-   réseau), chemins construits avec `path.join`, verrous par fichier pour les écritures concurrentes.
-5. **Pas d'exécution de shell dans le code publié.** Le bac à sable et les tests peuvent lancer des
-   processus ; `src/` et `scripts/` non.
-6. **Un comportement, un test.** Toute modification observable passe par `npm test`. Un test qui ne
-   peut pas s'exécuter (réseau absent, navigateur absent) doit se marquer `skip` **avec sa raison**,
-   jamais passer silencieusement.
+1. **Originality.** No third-party corpus, code or module enters this repository. `upstream/` is
+   forbidden and CI fails if it is committed. A knowledge record is written here, never imported.
+2. **Zero runtime dependencies.** The package declares only optional `peerDependencies` on the DSH
+   host. Any added dependency must be justified in the pull request and weighed for size.
+3. **ESM, no build step.** `node src/plugin.mjs` must work as-is. No transpiler, no bundler for the
+   package itself.
+4. **Portable across Windows and Linux.** No atomic rename (`rename` fails with `EPERM` on a network
+   drive), paths built with `path.join`, file locks for concurrent writes.
+5. **No shell execution in published code.** The sandbox and the tests may launch processes; `src/`
+   and `scripts/` may not.
+6. **One behavior, one test.** Every observable change goes through `npm test`. A test that cannot run
+   (no network, no browser) must be marked `skip` **with its reason**, never pass silently.
 
-## Fiches de connaissance
+## Knowledge records
 
-Une fiche = une décision. Le schéma est décrit dans `knowledge/README.md`.
+One record is one decision. The schema is described in `knowledge/README.md`.
 
-- `values` : nombres avec unités, présentés comme points de départ à ajuster.
-- `checks` : ce qu'on regarde sur l'image rendue, pas ce qu'on écrit dans un rapport.
-- `limits` : **obligatoire**. Une fiche sans limites est une affirmation sans bord.
-- `sources` : uniquement des URL vérifiables ; sinon `[]`, et la fiche ne prétend pas à une autorité
-  scientifique.
+- `values`: numbers with units, presented as starting points to adapt.
+- `checks`: what you look at on the rendered frame, not what you write in a report.
+- `limits`: **mandatory**. A record without limits is a claim without a boundary.
+- `sources`: only verifiable URLs; otherwise `[]`, and the record claims no scientific authority.
 
-Une fiche qui ne peut pas nommer sa limite n'est pas prête.
+A record that cannot name its limit is not ready.
 
 ## Commits
 
-Format conventionnel : `feat:`, `fix:`, `docs:`, `test:`, `ci:`, `chore:`.
+Conventional format: `feat:`, `fix:`, `docs:`, `test:`, `ci:`, `chore:`.
 
-Quand un co-auteur contribue, ajoute le trailer sur son propre paragraphe :
+When a co-author contributes, add the trailer in its own paragraph:
 
 ```text
 Co-authored-by: NetraDevLPDN <144937204+NetraDevLPDN@users.noreply.github.com>
 ```
 
-## Relecture
+## Review
 
-Un relecteur vérifie, dans cet ordre :
+A reviewer checks, in this order:
 
-1. la modification est originale et ne réintroduit aucun corpus importé ;
-2. les mesures annoncées viennent d'un fichier produit par les tests, pas d'une estimation ;
-3. les limites sont écrites, pas sous-entendues ;
-4. la suite passe sur Node 22 et 24.
+1. the change is original and reintroduces no imported corpus;
+2. the published measurements come from a file produced by the tests, not from an estimate;
+3. the limits are written, not implied;
+4. the suite passes on Node 22 and 24.
 
-## Règles de version
+## Versioning rules
 
-- Semver : `patch` pour un correctif, `minor` pour une fiche ou un outil ajouté, `major` pour un
-  changement de contrat (nom d'outil, schéma de fiche, format d'index).
-- Un tag doit correspondre exactement à `version` dans `package.json` — le workflow de release le
-  contrôle et refuse sinon.
-- `CHANGELOG.md` est mis à jour dans la même pull request que le changement ; la note de release
-  GitHub est générée à partir des commits et le complète, elle ne le remplace pas.
-- Détail de la procédure : [PUBLISHING.md](PUBLISHING.md).
+- Semver: `patch` for a fix, `minor` for a record or a tool added, `major` for a contract change
+  (tool name, record schema, index format).
+- A tag must match `version` in `package.json` exactly — the release workflow enforces it and refuses
+  otherwise.
+- `CHANGELOG.md` is updated in the same pull request as the change; the generated GitHub release note
+  complements it, it does not replace it.
+- Procedure details: [PUBLISHING.md](PUBLISHING.md).

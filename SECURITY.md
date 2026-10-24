@@ -1,53 +1,53 @@
-# Sécurité
+# Security
 
-## Modèle de menace
+## Threat model
 
-Un plugin DSH est du **code hôte de confiance** : il s'exécute dans le processus `dsh`, avec les
-droits de l'utilisateur, en dehors du bac à sable de l'agent. Installer ce paquet revient à exécuter
-son code.
+A DSH plugin is **trusted host code**: it runs inside the `dsh` process, with the user's privileges,
+outside the agent sandbox. Installing this package means executing its code.
 
-Surfaces exposées :
+Exposed surfaces:
 
-| Surface | Ce qu'elle touche | Risque |
+| Surface | What it touches | Risk |
 |---|---|---|
-| `my3d capture <url>` | lance un navigateur sur une URL fournie | accès au réseau local, exécution de JS d'un site tiers dans le navigateur piloté |
-| `my3d scaffold <dir>` | écrit des fichiers dans un dossier choisi | écrasement si `--force`, écriture hors du dossier prévu si le chemin est mal formé |
-| `my3d budget <file>`, `my3d resolve <id>` | lit un fichier JSON | lecture d'un chemin arbitraire accessible à l'utilisateur |
-| chargement de l'index | `JSON.parse` d'un fichier généré | empoisonnement local si le fichier est modifiable par un tiers |
+| `my3d capture <url>` | launches a browser on a supplied URL | access to the local network, execution of a third-party site's JS in the driven browser |
+| `my3d scaffold <dir>` | writes files into a chosen directory | overwrite with `--force`, writes outside the intended directory if the path is malformed |
+| `my3d budget <file>`, `my3d resolve <id>` | reads a JSON file | reading an arbitrary path the user can access |
+| index loading | `JSON.parse` of a generated file | local poisoning if a third party can modify the file |
 
-## Ce qui est déjà en place
+## What is already in place
 
-- **Aucune exécution de shell** dans le code publié (`src/`, `scripts/`) : vérifié par recherche de
-  `child_process`, `spawn`, `execFile`, `eval`. Les tests en lancent, mais `tests/` n'est pas publié.
-- **Aucun appel réseau** au chargement ; le seul accès distant est celui que `capture` effectue, vers
-  l'URL que l'utilisateur fournit explicitement.
-- **Pas de `eval`, pas de code dynamique** hors import statique.
-- **Écriture verrouillée** de l'index (fichier de verrou, écriture en place) : un autre processus ne
-  peut pas produire un index partiel exploitable.
-- **Suite de tests bloquante** avant publication (`prepublishOnly`).
+- **No shell execution** in published code (`src/`, `scripts/`): verified by searching for
+  `child_process`, `spawn`, `execFile`, `eval`. The tests launch processes, but `tests/` is not
+  published.
+- **No network call** at load time; the only remote access is the one `capture` performs, toward the
+  URL the user explicitly supplies.
+- **No `eval`, no dynamic code** beyond static imports.
+- **Locked index writes** (lock file, in-place write): another process cannot produce an exploitable
+  partial index.
+- **Blocking test suite** before publication (`prepublishOnly`).
 
-## Ce que ce paquet ne protège pas
+## What this package does not protect against
 
-- **SSRF via `capture`.** L'URL n'est pas filtrée : elle peut viser `127.0.0.1`, un routeur ou un
-  service interne. Ne passe que des URL que tu contrôles.
-- **Contenu tiers.** Une page distante exécute son propre JavaScript dans le navigateur piloté ; elle
-  peut lire ses propres cookies, pas ceux de ton navigateur personnel (profil isolé).
-- **Chemins fournis par l'utilisateur.** `scaffold` et `budget` font ce qu'on leur demande ; aucun
-  confinement à un répertoire.
-- **Exactitude des fiches.** Ce sont des recommandations chiffrées, pas des garanties physiques.
+- **SSRF through `capture`.** The URL is not filtered: it may target `127.0.0.1`, a router or an
+  internal service. Only pass URLs you control.
+- **Third-party content.** A remote page runs its own JavaScript in the driven browser; it can read
+  its own cookies, not those of your personal browser (isolated profile).
+- **User-supplied paths.** `scaffold` and `budget` do what they are told; no confinement to a
+  directory.
+- **Record accuracy.** These are numeric recommendations, not physical guarantees.
 
-## Signaler une vulnérabilité
+## Reporting a vulnerability
 
-N'ouvre **pas** d'issue publique. Utilise l'onglet **Security** du dépôt →
-*Report a vulnerability* (GitHub Security Advisories) :
+Do **not** open a public issue. Use the repository **Security** tab → *Report a vulnerability*
+(GitHub Security Advisories):
 
 <https://github.com/LordPhenixDeNetra/my3d-dream/security/advisories/new>
 
-Décris : version concernée, entrée exacte, comportement observé, impact estimé.
+Describe: affected version, exact input, observed behavior, estimated impact.
 
-Engagement de réponse : accusé de réception sous 72 heures, évaluation de gravité, correctif et
-publication coordonnée. Aucun délai contractuel n'est promis.
+Response commitment: acknowledgement within 72 hours, severity assessment, fix and coordinated
+disclosure. No contractual deadline is promised.
 
-## Versions supportées
+## Supported versions
 
-Le projet est en `0.x` : seule la dernière version publiée reçoit des correctifs de sécurité.
+The project is at `0.x`: only the latest published version receives security fixes.

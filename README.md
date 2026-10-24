@@ -4,85 +4,85 @@
 [![npm](https://img.shields.io/npm/v/my3d-dream.svg)](https://www.npmjs.com/package/my3d-dream)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Plugin DeepSeek Harness pour construire des scènes 3D **fondées sur des décisions vérifiables** —
-pas seulement du code qui compile.
+A DeepSeek Harness plugin for building 3D scenes **grounded in verifiable decisions** — not just code
+that compiles.
 
 ## Installation
 
 ```sh
-npm install -g my3d-dream     # installe la commande `my3d`
+npm install -g my3d-dream     # installs the `my3d` command
 ```
 
-Sans installation globale :
+Without a global install:
 
 ```sh
-npx my3d search "village au crépuscule"
+npx my3d search "village at dusk"
 ```
 
-Comme plugin DSH :
+As a DSH plugin:
 
 ```sh
 dsh plugin --profile desktop add my3d-dream
 ```
 
-## Démarrage
+## Getting started
 
 ```sh
-my3d search "village au crépuscule"
+my3d search "village at dusk"
 my3d resolve kb.lighting.golden-hour-village
 my3d scaffold ./scene --delivery web-desktop
 my3d budget ./scene/scene.json
 my3d capture http://127.0.0.1:5173 --views overview,closeup
 ```
 
-## Outils exposés au modèle
+## Tools exposed to the model
 
-| Outil | Rôle |
+| Tool | Purpose |
 |---|---|
-| `my3d_search` | classe les fiches de connaissance, renvoie ids + résumés |
-| `my3d_resolve` | renvoie une fiche complète (valeurs, contrôles, limites) |
-| `my3d_budget` | valide les coûts **déclarés** d'une scène |
-| `my3d_scaffold` | écrit un projet Vite + Three.js prêt à lancer |
+| `my3d_search` | ranks knowledge records, returns ids and one-line summaries |
+| `my3d_resolve` | returns one full record (values, checks, limits) |
+| `my3d_budget` | validates the **declared** render costs of a scene |
+| `my3d_scaffold` | writes a runnable Vite + Three.js project |
 
 ## Corpus
 
-`knowledge/` contient les fiches, rédigées ici : une décision par fichier, six domaines
-(`lighting`, `material`, `composition`, `motion`, `budget`, `verification`). Chaque fiche porte
-`values` (nombres de départ), `checks` (ce qu'on regarde sur la frame) et `limits` (ce qu'elle ne
-couvre pas).
+`knowledge/` holds the records, written for this project: one decision per file, six domains
+(`lighting`, `material`, `composition`, `motion`, `budget`, `verification`). Each record carries
+`values` (starting numbers), `checks` (what to look at on the frame) and `limits` (what it does not
+cover).
 
-## Mesures
+## Measurements
 
-Chiffres relevés sur le corpus actuel : **7 fiches, 465 termes**.
+Numbers measured on the current corpus: **7 records, 465 terms**.
 
-| Axe | Valeur | Source |
+| Axis | Value | Source |
 |---|---|---|
-| Contexte par tâche | ~1 380 o (≈345 tokens) contre 8 484 o (≈2 121) pour tout lire — **−34 %** | [`docs/tokens.json`](docs/tokens.json) |
-| Skill au chargement | 4 244 o | [`docs/metrics.json`](docs/metrics.json) |
-| Démarrage de l'index | 15 ms à chaud contre 90 ms à froid | [`docs/baseline.json`](docs/baseline.json) |
-| Requête p50 / p95 | 0,019 ms / 0,030 ms | [`index/benchmark.json`](index/benchmark.json) |
-| Frame réelle | **2 draw calls · 14 144 triangles · 1 texture**, 0 erreur JS | [`docs/runtime.json`](docs/runtime.json) |
+| Context per task | ~1,380 B (≈345 tokens) against 8,484 B (≈2,121) to read everything — **−34 %** | [`docs/tokens.json`](docs/tokens.json) |
+| Skill at load | 4,244 B | [`docs/metrics.json`](docs/metrics.json) |
+| Index startup | 15 ms warm against 90 ms cold | [`docs/baseline.json`](docs/baseline.json) |
+| Query p50 / p95 | 0.019 ms / 0.030 ms | [`index/benchmark.json`](index/benchmark.json) |
+| Real frame | **2 draw calls · 14,144 triangles · 1 texture**, 0 JS errors | [`docs/runtime.json`](docs/runtime.json) |
 
-L'écart de contexte diminue logiquement avec un corpus de 7 fiches : l'indexation paie surtout quand
-la base grossit. Ces valeurs seront relevées à nouveau à chaque ajout.
+The context gap shrinks with a corpus of only 7 records: indexing pays off as the base grows. These
+values are re-measured on every test run.
 
-## Limites assumées
+## Assumed limits
 
-- Le temps de frame de [`docs/runtime.json`](docs/runtime.json) vient d'un rastériseur **logiciel**
-  (SwiftShader) : il ne représente pas une GPU. Draw calls et triangles sont indépendants du matériel.
-- `my3d_budget` vérifie des nombres **déclarés** ; des tests confirment qu'ils correspondent au coût
-  analytique puis au coût réel mesuré dans le navigateur pour le scaffold.
-- La capture sort en code 3 avec un message clair quand Playwright est absent.
-- Le plugin est couvert par des tests de contrat, pas par un chargement dans un profil DSH réel :
-  `dsh plugin add` reste bloqué dans cet environnement (lecteur `N:`).
+- The frame time in [`docs/runtime.json`](docs/runtime.json) comes from a **software** rasterizer
+  (SwiftShader): it does not represent a GPU. Draw calls and triangles are hardware independent.
+- `my3d_budget` validates **declared** numbers; separate tests confirm they match the analytic cost
+  and then the real cost measured in the browser for the scaffold.
+- `capture` exits with code 3 and a clear message when Playwright is absent.
+- The plugin is covered by contract tests, not by loading it into a real DSH profile: `dsh plugin add`
+  remains blocked in this environment (`N:` drive).
 
-## Licence
+## License
 
-MIT — voir [LICENSE](LICENSE). Copyright (c) 2026 LordPhenixDeNetra and NetraDevLPDN.
+MIT — see [LICENSE](LICENSE). Copyright (c) 2026 LordPhenixDeNetra and NetraDevLPDN.
 
-## Contribuer, signaler, publier
+## Contributing, reporting, publishing
 
-- Règles de code et de release : [CONTRIBUTING.md](CONTRIBUTING.md)
-- Modèle de menace et signalement : [SECURITY.md](SECURITY.md)
-- Runbook de publication : [PUBLISHING.md](PUBLISHING.md)
-- Historique des versions : [CHANGELOG.md](CHANGELOG.md)
+- Code and release rules: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Threat model and reporting: [SECURITY.md](SECURITY.md)
+- Release runbook: [PUBLISHING.md](PUBLISHING.md)
+- Version history: [CHANGELOG.md](CHANGELOG.md)

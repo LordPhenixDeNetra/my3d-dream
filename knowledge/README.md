@@ -1,32 +1,32 @@
-# Corpus de connaissances — écrit ici
+# Knowledge corpus — written here
 
-Ces fiches sont **rédigées pour ce projet**. Elles ne sont copiées d'aucun dépôt.
+These records are **written for this project**. They are copied from no repository.
 
-## Règles
+## Rules
 
-1. Une fiche = une décision concrète qu'un agent doit prendre, pas un cours.
-2. Chaque valeur numérique est justifiée ou marquée comme point de départ à ajuster.
-3. `checks` contient ce qui doit être vérifié sur l'image rendue, pas ce qui doit être écrit dans un rapport.
-4. `limits` dit ce que la fiche ne couvre pas — c'est obligatoire.
-5. Pas de source externe sans URL vérifiable ; sinon `sources: []` et le dire.
+1. One record = one concrete decision an agent must make, not a lecture.
+2. Every numeric value is justified or marked as a starting point to adapt.
+3. `checks` contains what must be verified on the rendered image, not what must be written in a report.
+4. `limits` states what the record does not cover — this is mandatory.
+5. No external source without a verifiable URL; otherwise `sources: []` and say so.
 
-## Schéma
+## Schema
 
 ```json
 {
   "schema_version": 1,
-  "id": "kb.<domaine>.<sujet>",
+  "id": "kb.<domain>.<subject>",
   "kind": "lighting | material | composition | motion | budget | verification",
   "title": "…",
-  "summary": "une phrase : la décision et son effet",
-  "applies_when": ["situations où la fiche s'applique"],
-  "values": { "clé": "valeur de départ, unité explicite" },
-  "checks": ["ce qu'on regarde sur la frame"],
-  "limits": ["ce que la fiche ne dit pas"],
+  "summary": "one sentence: the decision and its effect",
+  "applies_when": ["situations where the record applies"],
+  "values": { "key": "starting value, explicit unit" },
+  "checks": ["what you look at on the frame"],
+  "limits": ["what the record does not say"],
   "sources": []
 }
 ```
 
-## Domaines
+## Domains
 
 `lighting`, `material`, `composition`, `motion`, `budget`, `verification`.
