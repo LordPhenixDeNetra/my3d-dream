@@ -1,22 +1,38 @@
 # My3D_Dream
 
+[![CI](https://github.com/LordPhenixDeNetra/my3d-dream/actions/workflows/ci.yml/badge.svg)](https://github.com/LordPhenixDeNetra/my3d-dream/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/my3d-dream.svg)](https://www.npmjs.com/package/my3d-dream)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Plugin DeepSeek Harness pour construire des scènes 3D **fondées sur des décisions vérifiables** —
 pas seulement du code qui compile.
+
+## Installation
+
+```sh
+npm install -g my3d-dream     # installe la commande `my3d`
+```
+
+Sans installation globale :
+
+```sh
+npx my3d search "village au crépuscule"
+```
+
+Comme plugin DSH :
+
+```sh
+dsh plugin --profile desktop add my3d-dream
+```
 
 ## Démarrage
 
 ```sh
-node bin/my3d.mjs search "village au crépuscule"
-node bin/my3d.mjs resolve <record-id>
-node bin/my3d.mjs scaffold ./scene --delivery web-desktop
-node bin/my3d.mjs budget ./scene/scene.json
-node bin/my3d.mjs capture http://127.0.0.1:5173 --views overview,closeup
-```
-
-Comme plugin :
-
-```sh
-dsh plugin --profile desktop add .
+my3d search "village au crépuscule"
+my3d resolve kb.lighting.golden-hour-village
+my3d scaffold ./scene --delivery web-desktop
+my3d budget ./scene/scene.json
+my3d capture http://127.0.0.1:5173 --views overview,closeup
 ```
 
 ## Outils exposés au modèle
@@ -62,4 +78,11 @@ la base grossit. Ces valeurs seront relevées à nouveau à chaque ajout.
 
 ## Licence
 
-Le code et les fiches de `knowledge/` sont sous MIT, écrits pour ce projet.
+MIT — voir [LICENSE](LICENSE). Copyright (c) 2026 LordPhenixDeNetra and NetraDevLPDN.
+
+## Contribuer, signaler, publier
+
+- Règles de code et de release : [CONTRIBUTING.md](CONTRIBUTING.md)
+- Modèle de menace et signalement : [SECURITY.md](SECURITY.md)
+- Runbook de publication : [PUBLISHING.md](PUBLISHING.md)
+- Historique des versions : [CHANGELOG.md](CHANGELOG.md)
