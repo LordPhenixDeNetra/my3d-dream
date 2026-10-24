@@ -64,6 +64,11 @@ function serve(root) {
 }
 
 test('a real browser renders the scaffold and reports measured draw calls', { timeout: 300000 }, async (t) => {
+  if (process.env.MY3D_SKIP_BROWSER === '1') {
+    t.skip('MY3D_SKIP_BROWSER=1 (no Chromium-family browser on this runner)');
+    return;
+  }
+
   await scaffold(APP_DIR, { name: 'runtime-check', delivery: 'web-desktop', force: true });
 
   const install = await run('npm', ['install', '--no-audit', '--no-fund'], APP_DIR);
