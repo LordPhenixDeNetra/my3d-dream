@@ -40,6 +40,15 @@ jobs:
             exit 1
           fi
 
+      - name: Check npm credentials
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "::error::secret NPM_TOKEN is missing or empty — Settings → Secrets and variables → Actions, exact name NPM_TOKEN, repository scope"
+            exit 1
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Install
         run: npm install --no-audit --no-fund
 
