@@ -1,0 +1,12 @@
+{
+  "name": "lantern-village",
+  "delivery": "web-desktop",
+  "lights": 3,
+  "textures": 6,
+  "textureBytes": 8000000,
+  "objects": [
+    { "id": "terrain", "drawCalls": 1, "triangles": 120000 },
+    { "id": "cottages", "drawCalls": 8, "triangles": 90000 },
+    { "id": "trees", "drawCalls": 1, "triangles": 40000 }
+  ]
+}

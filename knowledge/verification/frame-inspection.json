@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "kb.verification.frame-inspection",
+  "kind": "verification",
+  "title": "Reading a rendered frame instead of trusting the code",
+  "summary": "A built scene proves nothing until a frame is inspected at the distances the user will use; the check list covers what code review cannot see.",
+  "applies_when": [
+    "before reporting a scene as finished",
+    "after any change to lighting, materials or camera"
+  ],
+  "values": {
+    "capture_min_views": 3,
+    "views": "overview, inspection, close-up",
+    "settle_ms_before_capture": 1200,
+    "compare_against": "the previous frame of the same view, not against memory"
+  },
+  "checks": [
+    "the hero is identifiable at overview",
+    "nothing floats without support and nothing intersects what it should not",
+    "the light comes from where the visible sources are",
+    "interactive controls change what they claim to change",
+    "a failed check is reported as failed, not omitted"
+  ],
+  "limits": [
+    "an image check cannot certify physical accuracy",
+    "one frame does not prove motion correctness; motion needs a second sample or a difference image"
+  ],
+  "sources": []
+}

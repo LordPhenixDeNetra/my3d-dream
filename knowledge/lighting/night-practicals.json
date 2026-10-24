@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "kb.lighting.night-practicals",
+  "kind": "lighting",
+  "title": "Night scene lit only by practicals",
+  "summary": "At night the scene should be lit by visible sources: lanterns, windows, fire. A global fill kills the effect.",
+  "applies_when": [
+    "night exterior or interior",
+    "the scene contains a light the viewer can point at"
+  ],
+  "values": {
+    "practical_intensity_range": "8-40 candela-equivalent, scaled by distance",
+    "practical_color_k": "1800-2400 for fire and oil, 2700-3000 for electric",
+    "ambient_k": 9000,
+    "ambient_intensity": 0.04,
+    "bloom_threshold": 0.85,
+    "bloom_strength": 0.35,
+    "fog_density": "0.015-0.03 for depth without milkiness"
+  },
+  "checks": [
+    "every lit surface can be traced to a visible emitter",
+    "the practical itself is not a flat white disc — it has falloff",
+    "shadows still read direction; a 360-degree fill flattens them",
+    "dark areas stay dark at overview distance"
+  ],
+  "limits": [
+    "does not cover emissive-only signage",
+    "bloom values here assume ACES tone mapping"
+  ],
+  "sources": []
+}

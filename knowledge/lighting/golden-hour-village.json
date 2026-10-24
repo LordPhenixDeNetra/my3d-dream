@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "kb.lighting.golden-hour-village",
+  "kind": "lighting",
+  "title": "Golden hour over a small exterior set",
+  "summary": "Low sun with long shadows reads as late afternoon; most failures come from a sun that is too high and shadows that are too soft.",
+  "applies_when": [
+    "exterior scene meant to feel warm or nostalgic",
+    "village, landscape or diorama viewed from 5 to 30 metres"
+  ],
+  "values": {
+    "sun_elevation_deg": "6-12 (below 15 kills the long-shadow read)",
+    "sun_azimuth": "30-60 degrees off the hero camera axis, never straight behind",
+    "sun_color_k": 3200,
+    "sun_intensity": 2.5,
+    "sky_ambient_k": 7500,
+    "ambient_intensity": 0.35,
+    "shadow_map_px": 2048,
+    "shadow_bias": -0.0005,
+    "exposure": 1.0,
+    "tone_mapping": "ACES Filmic, or AgX if highlights on water or metal clip"
+  },
+  "checks": [
+    "shadows are longer than the objects are tall",
+    "lit faces and shadow faces stay separable at overview distance",
+    "no crushed blacks in the shadow side of the hero object",
+    "specular highlights on water or metal do not clip to white"
+  ],
+  "limits": [
+    "does not cover interiors seen through windows",
+    "no claim about physically accurate sun position for a real date or place"
+  ],
+  "sources": []
+}

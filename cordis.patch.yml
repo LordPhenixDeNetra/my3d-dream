@@ -1,0 +1,6 @@
+# Bundle layer for My3D_Dream: inserts the plugin row into a profile composition.
+- insert:
+    - id: my3d
+      name: my3d-dream
+      config:
+        indexPath: index

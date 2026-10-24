@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "kb.composition.overview-to-closeup",
+  "kind": "composition",
+  "title": "One camera, three distances that all have to work",
+  "summary": "A scene is judged at overview, inspection and close-up. Design one detail level per distance instead of one dense model everywhere.",
+  "applies_when": [
+    "interactive scene with orbit or free camera",
+    "any object the user can approach"
+  ],
+  "values": {
+    "overview_distance_m": "3-5x the set's largest dimension",
+    "inspection_distance_m": "1-2x the hero object's height",
+    "closeup_distance_m": "0.3-0.6x the hero object's height",
+    "silhouette_readability": "hero must be identifiable as a flat black shape at overview",
+    "detail_budget_split": "60% overview silhouette, 30% inspection parts, 10% close-up surface"
+  },
+  "checks": [
+    "hero silhouette is unambiguous at overview",
+    "no object has detail that only exists at close-up but is invisible at inspection",
+    "the camera never needs to clip through geometry to see the hero",
+    "close-up reveals contact and joins, not mush"
+  ],
+  "limits": [
+    "assumes a perspective camera with a 35-55 degree vertical field of view",
+    "does not cover orthographic diagram views"
+  ],
+  "sources": []
+}

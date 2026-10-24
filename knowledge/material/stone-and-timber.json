@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "kb.material.stone-and-timber",
+  "kind": "material",
+  "title": "Distinguishing stone from timber without textures",
+  "summary": "Stone and wood separate by roughness, edge wear and color variance, not by detail maps.",
+  "applies_when": [
+    "procedural geometry without authored textures",
+    "village, architecture or prop scenes viewed closer than 15 metres"
+  ],
+  "values": {
+    "stone_base_color": "#8a8577",
+    "stone_roughness": 0.92,
+    "stone_color_variance": "±6% per face, seeded, never uniform",
+    "timber_base_color": "#6b4a32",
+    "timber_roughness": 0.78,
+    "timber_grain_scale": "grain direction follows the longest axis of each member",
+    "edge_wear": "lighter roughness on exposed corners only, not on the whole surface"
+  },
+  "checks": [
+    "at inspection distance the two materials differ in highlight shape, not only in color",
+    "no repeated identical face pattern on adjacent stones",
+    "timber grain direction contradicts no structural member",
+    "edges are worn, faces are not uniformly noisy"
+  ],
+  "limits": [
+    "no claim about real stone types or species",
+    "vertex-color variance needs enough mesh density; coarse meshes need per-face assignment"
+  ],
+  "sources": []
+}

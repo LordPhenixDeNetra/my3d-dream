@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "kb.motion.patrol-loop",
+  "kind": "motion",
+  "title": "Deterministic patrol loop for creatures",
+  "summary": "A creature that walks a closed path should derive position from elapsed time, so every frame and every replay shows the same state.",
+  "applies_when": [
+    "animated creature or vehicle following a path",
+    "scene that must look identical on reload or when captured"
+  ],
+  "values": {
+    "path_closed": true,
+    "speed_m_per_s": "0.6-1.4 for human-scale creatures",
+    "turn_lead_m": "1.5x body length before a corner",
+    "bob_amplitude_m": "0.02-0.04 of body height",
+    "phase_offset_per_agent": "golden-angle step so agents never march in sync"
+  },
+  "checks": [
+    "position(t) is a pure function of time, not of accumulated deltas",
+    "no agent teleports at the loop seam",
+    "turning looks anticipatory, not instantaneous",
+    "pausing the renderer and resuming does not shift the phase"
+  ],
+  "limits": [
+    "does not cover collision avoidance or crowd interaction",
+    "no claim about real animal gait"
+  ],
+  "sources": []
+}

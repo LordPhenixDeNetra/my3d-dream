@@ -1,0 +1,48 @@
+{
+  "name": "my3d-dream",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "My3D_Dream — DSH plugin for grounded 3D scene authoring: indexed search, scaffold, render budget, capture.",
+  "license": "MIT",
+  "main": "src/plugin.mjs",
+  "bin": {
+    "my3d": "bin/my3d.mjs"
+  },
+  "exports": {
+    ".": "./src/plugin.mjs",
+    "./search": "./src/search.mjs",
+    "./tokenize": "./src/tokenize.mjs",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "bin",
+    "skill",
+    "knowledge",
+    "templates",
+    "scripts",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "index": "node scripts/build-index.mjs"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.5",
+    "@deepseek-ai/dsh-tools": "^0.2.1-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true },
+    "@deepseek-ai/dsh-tools": { "optional": true }
+  }
+}

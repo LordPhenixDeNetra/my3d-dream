@@ -1,0 +1,12 @@
+{
+  "name": "over-budget-village",
+  "delivery": "web-mobile",
+  "lights": 9,
+  "textures": 40,
+  "textureBytes": 90000000,
+  "objects": [
+    { "id": "terrain", "drawCalls": 1, "triangles": 900000 },
+    { "id": "cottages", "drawCalls": 120, "triangles": 800000 },
+    { "id": "trees", "drawCalls": 90, "triangles": 500000 }
+  ]
+}

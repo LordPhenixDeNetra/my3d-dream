@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "kb.budget.desktop-village",
+  "kind": "budget",
+  "title": "Draw-call budget for a desktop village scene",
+  "summary": "On a mid-range laptop, a village scene stays at 60 fps when it holds under 150 draw calls and 750k triangles, with instancing carrying repeated props.",
+  "applies_when": [
+    "desktop browser target, integrated or low-end discrete GPU",
+    "repeated props: trees, fences, lanterns, stones"
+  ],
+  "values": {
+    "draw_calls_max": 150,
+    "triangles_max": 750000,
+    "textures_max": 24,
+    "texture_bytes_max": "64 MB",
+    "lights_max": 6,
+    "frame_ms_target": 16.7,
+    "per_prop_triangles_max": "2000 for anything repeated more than 20 times",
+    "instance_threshold": "more than 8 identical props -> one InstancedMesh"
+  },
+  "checks": [
+    "draw calls counted from the renderer, not estimated",
+    "texture memory counted after decode, not from file size",
+    "frame time measured on the target machine, not extrapolated from triangle count",
+    "no shadow-casting light that covers the whole set at map size above 2048"
+  ],
+  "limits": [
+    "numbers assume a 1280x720 to 1920x1080 render target",
+    "does not cover VR or mobile, which need roughly half"
+  ],
+  "sources": []
+}

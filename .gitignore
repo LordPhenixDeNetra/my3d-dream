@@ -1,0 +1,25 @@
+# Dépendances
+node_modules/
+
+# Artefacts régénérés (npm run index, npm test)
+index/bm25.json
+index/benchmark.json
+index/.build.lock
+docs/*.json
+
+# Espace de travail des tests (contient des node_modules et des projets Vite construits)
+tests/.tmp/
+
+# Captures écrites par `my3d capture`
+captures/
+
+# Corpus importé — destiné à disparaître, ne doit jamais être versionné
+upstream/
+
+# Bruit système et éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.idea/
+.vscode/
