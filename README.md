@@ -35,6 +35,17 @@ my3d budget ./scene/scene.json
 my3d capture http://127.0.0.1:5173 --views overview,closeup
 ```
 
+### See it on screen
+
+`examples/golden-village` is a small scene that applies four records, with the expected result
+described cue by cue:
+
+```sh
+cd examples/golden-village
+npm install
+npm run dev
+```
+
 ## Tools exposed to the model
 
 | Tool | Purpose |
