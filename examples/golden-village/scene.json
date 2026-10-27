@@ -1,0 +1,13 @@
+{
+  "name": "golden-village",
+  "delivery": "web-desktop",
+  "lights": 2,
+  "textures": 0,
+  "textureBytes": 0,
+  "objects": [
+    { "id": "ground", "drawCalls": 1, "triangles": 96 },
+    { "id": "cottage-walls", "drawCalls": 1, "triangles": 60 },
+    { "id": "cottage-roofs", "drawCalls": 1, "triangles": 40 },
+    { "id": "creature", "drawCalls": 1, "triangles": 336 }
+  ]
+}
