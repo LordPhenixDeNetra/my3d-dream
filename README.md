@@ -97,3 +97,5 @@ MIT — see [LICENSE](LICENSE). Copyright (c) 2026 LordPhenixDeNetra and NetraDe
 - Threat model and reporting: [SECURITY.md](SECURITY.md)
 - Release runbook: [PUBLISHING.md](PUBLISHING.md)
 - Version history: [CHANGELOG.md](CHANGELOG.md)
+
+<!-- uuu -->
